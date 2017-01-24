@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: hadoop-zookeeper
+  labels:
+    component: hadoop-zookeeper
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: hadoop-zookeeper
+    spec:
+      containers:
+      - name: hadoop-zookeeper
+        image: vincentveracruz/hadoop-poc-zookeeper
+        volumeMounts:
+        - mountPath: /data
+          name: storage
+      volumes:
+      - name: storage
+        emptyDir: {}

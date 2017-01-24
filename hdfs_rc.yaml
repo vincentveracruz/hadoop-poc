@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: hadoop-hdfs
+  labels:
+    component: hadoop-hdfs
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: hadoop-hdfs
+    spec:
+      containers:
+      - name: hadoop-hdfs
+        image: vincentveracruz/hdfs
+        ports:
+        - containerPort: 9000
+          name: clientprotocol
+          protocol: TCP
+        - containerPort: 50070
+          name: httpconnector
+          protocol: TCP
+      volumes:
+      - name: storage
+        emptyDir: {}

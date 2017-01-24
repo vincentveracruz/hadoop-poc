@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: hadoop-master
+  labels:
+    component: hadoop-master
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: hadoop-master
+    spec:
+      containers:
+      - name: hadoop-master
+        image: vincentveracruz/hadoop-poc-resourcemanager
+        env:
+        - name: ZOOKEEPER_ADDR
+          value: 10.100.116.99
+        - name: HDFS_HOST
+          value: 10.100.124.86
+        ports:
+        - containerPort: 8088
+          hostPort: 18088
+          name: dashboard
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /data
+          name: storage
+      volumes:
+      - name: storage
+        emptyDir: {}
+      - name: hadoop-slave

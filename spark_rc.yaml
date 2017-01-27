@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: spark
-        image: sequenceiq/spark
+        image: vincentveracruz/spark
         ports:
         - containerPort: 8088
           name: clientprotocol
